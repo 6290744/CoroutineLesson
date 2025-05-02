@@ -1,11 +1,12 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
+
+[RequireComponent(typeof(TimerView))]
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private float _interval = 0.5f;
+    [SerializeField] private TimerView _timerView;
     
     private Coroutine _coroutine;
     private bool _isActive = false;
@@ -17,28 +18,33 @@ public class Timer : MonoBehaviour
         {
             if (_isActive == false)
             {
+                _isActive = true;
+                
                 _coroutine = StartCoroutine(CountRoutine());
             }
             else
             {
                 _isActive = false;
-                
-                StopCoroutine(_coroutine);
+
+                if (_coroutine != null)
+                {
+                    StopCoroutine(_coroutine);
+                }
             }
         }
     }
     
     private IEnumerator CountRoutine()
     {
-        _isActive = true;
+        WaitForSeconds wait = new WaitForSeconds(_interval);
         
         while (_isActive)
         {
             _counter ++;
             
-            _text.text = _counter.ToString();
-        
-            yield return new WaitForSeconds(_interval);
+            _timerView.SetTimer(_counter);
+
+            yield return wait;
         }
     }
 }
