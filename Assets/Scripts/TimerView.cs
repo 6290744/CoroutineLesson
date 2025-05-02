@@ -5,8 +5,18 @@ public class TimerView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
 
-    public void SetTimer(int minutes)
+    private void OnEnable()
     {
-        _text.text = minutes.ToString(); //может сюда экшен нужен?
+        Timer.OnTimerChanged += SetTimer;
+    }
+
+    private void OnDisable()
+    {
+        Timer.OnTimerChanged -= SetTimer;
+    }
+
+    private void SetTimer(int minutes)
+    {
+        _text.text = minutes.ToString();
     }
 }

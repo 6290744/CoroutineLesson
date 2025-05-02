@@ -1,20 +1,22 @@
 using System.Collections;
 using UnityEngine;
-
-[RequireComponent(typeof(TimerView))]
+using System;
 
 public class Timer : MonoBehaviour
 {
+    private const int LeftMouseButton = 0;
+    
+    public static event Action<int> OnTimerChanged;
+    
     [SerializeField] private float _interval = 0.5f;
-    [SerializeField] private TimerView _timerView;
     
     private Coroutine _coroutine;
     private bool _isActive = false;
     private int _counter = 0;
-
+    
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(LeftMouseButton))
         {
             if (_isActive == false)
             {
@@ -40,9 +42,9 @@ public class Timer : MonoBehaviour
         
         while (_isActive)
         {
-            _counter ++;
+            _counter++;
             
-            _timerView.SetTimer(_counter);
+            OnTimerChanged?.Invoke(_counter);
 
             yield return wait;
         }
