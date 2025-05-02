@@ -371,7 +371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interval: 0.5
-  _timerView: {fileID: 722395696}
 --- !u!114 &722395694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 722395694}
+  _timer: {fileID: 722395693}
 --- !u!1 &769155345
 GameObject:
   m_ObjectHideFlags: 0
