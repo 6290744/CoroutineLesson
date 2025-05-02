@@ -6,13 +6,13 @@ public class Timer : MonoBehaviour
 {
     private const int LeftMouseButton = 0;
     
-    public static event Action<int> OnTimerChanged;
-    
     [SerializeField] private float _interval = 0.5f;
     
     private Coroutine _coroutine;
     private bool _isActive = false;
     private int _counter = 0;
+    
+    public event Action<int> TimerChanged;
     
     private void Update()
     {
@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
             {
                 _isActive = true;
                 
-                _coroutine = StartCoroutine(CountRoutine());
+                _coroutine = StartCoroutine(CountdownRoutine());
             }
             else
             {
@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
         }
     }
     
-    private IEnumerator CountRoutine()
+    private IEnumerator CountdownRoutine()
     {
         WaitForSeconds wait = new WaitForSeconds(_interval);
         
@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
         {
             _counter++;
             
-            OnTimerChanged?.Invoke(_counter);
+            TimerChanged?.Invoke(_counter);
 
             yield return wait;
         }
