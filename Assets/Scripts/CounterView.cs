@@ -1,19 +1,19 @@
 using TMPro;
 using UnityEngine;
 
-public class TimerView : MonoBehaviour
+public class CounterView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private Timer _timer;
+    [SerializeField] private Counter counter;
 
     private void OnEnable()
     {
-        _timer.TimerChanged += UpdateText;
+        counter.ValueChanged += UpdateText;
     }
 
     private void OnDisable()
     {
-        _timer.TimerChanged -= UpdateText;
+        counter.ValueChanged -= UpdateText;
     }
 
     private void UpdateText(int minutes)

@@ -2,17 +2,17 @@ using System.Collections;
 using UnityEngine;
 using System;
 
-public class Timer : MonoBehaviour
+public class Counter : MonoBehaviour
 {
     private const int LeftMouseButton = 0;
     
-    [SerializeField] private float _interval = 0.5f;
+    [SerializeField] private float _updateInterval = 0.5f;
     
     private Coroutine _coroutine;
     private bool _isActive = false;
-    private int _counter = 0;
+    private int _value = 0;
     
-    public event Action<int> TimerChanged;
+    public event Action<int> ValueChanged;
     
     private void Update()
     {
@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
             {
                 _isActive = true;
                 
-                _coroutine = StartCoroutine(CountdownRoutine());
+                _coroutine = StartCoroutine(UpdateValue());
             }
             else
             {
@@ -36,15 +36,15 @@ public class Timer : MonoBehaviour
         }
     }
     
-    private IEnumerator CountdownRoutine()
+    private IEnumerator UpdateValue()
     {
-        WaitForSeconds wait = new WaitForSeconds(_interval);
+        WaitForSeconds wait = new WaitForSeconds(_updateInterval);
         
         while (_isActive)
         {
-            _counter++;
+            _value++;
             
-            TimerChanged?.Invoke(_counter);
+            ValueChanged?.Invoke(_value);
 
             yield return wait;
         }
