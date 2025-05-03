@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 722395693}
   - component: {fileID: 722395696}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e9fdbefc2c948c386d129f2775b1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interval: 0.5
+  _updateInterval: 0.5
 --- !u!114 &722395694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 722395694}
-  _timer: {fileID: 722395693}
+  counter: {fileID: 722395693}
 --- !u!1 &769155345
 GameObject:
   m_ObjectHideFlags: 0
